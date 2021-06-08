@@ -8,8 +8,6 @@ stage_footer(.stage = this_stage)
 }
 \arguments{
 \item{.stage}{the name of the stage}
-
-\item{.merchant_alias}{alias for merchant}
 }
 \value{
 

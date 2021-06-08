@@ -8,8 +8,6 @@ log_stage_step(msg)
 }
 \arguments{
 \item{msg}{log message}
-
-\item{.merchant_alias}{alias for merchant}
 }
 \value{
 prints message to stdout

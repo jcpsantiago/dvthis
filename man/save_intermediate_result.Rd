@@ -7,9 +7,9 @@
 save_intermediate_result(r_object, .filename = NULL)
 }
 \arguments{
-\item{.filename}{optional file name to pass qs::qsave. Default is df's name}
+\item{r_object}{the R object to be saved}
 
-\item{df}{the R data frame to save}
+\item{.filename}{optional file name to pass qs::qsave. Default is df's name}
 }
 \value{
 saves data to intermediate folder as qs file

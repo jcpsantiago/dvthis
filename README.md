@@ -33,16 +33,16 @@ It will have the following folder structure and initiate DVC for you
 
 ```sh
 .
-├── data
-│  ├── intermediate
-│  └── raw
-├── metrics
-├── models
-├── plots
-├── queries
-├── R
-├── reports
-└── stages
+├── data                   # all data that's not a model, metrics or plots goes here
+│  ├── intermediate        # outputs of each stage to be used in future stages
+│  └── raw                 # original data; should never be overwritten; saved in remote storage with DVC
+├── metrics                # metrics of interest in JSON; DVC can track these over time
+├── models                 # final output of your pipeline, in case it's a model
+├── plots                  # any plots produced, including CSVs with data for plots (see DVC docs)
+├── queries                # .sql files or other format so that queries are also tracked
+├── R                      # additional R functions needed for this project and not in a pkg yet
+├── reports                # more complete reports or model cards
+└── stages                 # scripts for each stage; doesn't need to be only in R!
 ```
 
 This structure assumes a DVC pipeline for Machine Learning made out of multiple `stages/*.R` which will 
@@ -80,4 +80,36 @@ It also allows to have an interactive workflow e.g. if you want to experiment wi
 * Run the modified chunk of code and see the result in the R REPL/Console
 * Save the script and run `dvc repro` in the terminal to run the pipeline starting at the modified feature transformation script all the way downstream
 * Rinse and repeat!
+
+A stage script could look something like this:
+```r
+#!/usr/bin/env Rscript
+
+# you may not need command line arguments, but they're helpful in parameterised pipelines
+n_of_dragons <- commandArgs(trailingOnly = TRUE)[1]
+
+# assigning it to this_stage by convention will allow stage_footer() to be called without args
+this_stage <- dvcru::stage_header("Choosing dragons")
+
+dvcru::log_stage_step("Loading dragon data")
+dragons_raw <- readr::read_csv(here::here("data/raw/dragons.csv"))
+
+dvcru::log_stage_step("Loading clean kingdom data")
+kingdoms <- dvcru::read_intermediate_result("kingdoms")
+
+dvcru::log_stage_step("Keeping only {n_of_dragons} dragons")
+dragons_clean <- head(dragons_raw, n_of_dragons)
+dragons_and_kingdoms <- dplyr::inner_join(dragons_clean, kingdoms)
+
+# you don't have to save every single intermediate result, but here I want to 
+# be extensive for documentation sake
+dvcru::log_stage_step("Saving intermediate dragons_clean")
+dvcru::save_intermediate_result(dragons_clean)
+
+dvcru::log_stage_step("Saving intermediate dragons_clean")
+dvcru::save_intermediate_result(dragons_and_kingdoms)
+
+dvcru::stage_footer()
+```
+
 

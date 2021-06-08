@@ -1,6 +1,7 @@
 #' Message to separate stages
 #'
 #' @param this_stage name of the stage
+#' @param .right additional information to show on the right side of the header. Defaults to NULL
 #'
 #' @return string with name of stage
 #' @author João Santiago
@@ -23,12 +24,9 @@ stage_header <- function(this_stage, .right = NULL) {
 #' Message to finish stage
 #'
 #' @param .stage the name of the stage
-#' @param .merchant_alias alias for merchant
 #'
 #' @return
 #' @export
-#'
-#' @examples
 stage_footer <- function(.stage = this_stage) {
   message(
     crayon::green(cli::symbol$tick),
@@ -42,7 +40,6 @@ stage_footer <- function(.stage = this_stage) {
 #' Log a stage step
 #'
 #' @param msg log message
-#' @param .merchant_alias alias for merchant
 #'
 #' @return prints message to stdout
 #' @author João Santiago
@@ -55,7 +52,7 @@ log_stage_step <- function(msg) {
 
 
 #' Saves data to intermediate
-#' @param df the R data frame to save
+#' @param r_object the R object to be saved
 #' @param .filename optional file name to pass qs::qsave. Default is df's name
 #' @return saves data to intermediate folder as qs file
 #' @author João Santiago
@@ -75,7 +72,7 @@ save_intermediate_result <- function(r_object, .filename = NULL) {
   }
 
   message("Saving ", r_object_name, ".qs in ", path_prefix)
-  qs::qsave(df, glue::glue("{path_prefix}/{r_object_name}.qs"))
+  qs::qsave(r_object, glue::glue("{path_prefix}/{r_object_name}.qs"))
 }
 
 

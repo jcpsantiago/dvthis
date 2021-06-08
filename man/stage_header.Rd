@@ -8,6 +8,8 @@ stage_header(this_stage, .right = NULL)
 }
 \arguments{
 \item{this_stage}{name of the stage}
+
+\item{.right}{additional information to show on the right side of the header. Defaults to NULL}
 }
 \value{
 string with name of stage
