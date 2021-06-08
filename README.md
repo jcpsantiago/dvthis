@@ -72,7 +72,7 @@ For example you could have stages (separate, independent scripts) for:
 
 This way it's possible to experiment and make changes to a smaller amount of code 
 each time.
-It also allows to have an interactive workflow e.g. if you want to experiment with a new transformation
+It also enables an interactive workflow e.g. if you want to experiment with a new transformation
 
 * Open the feature transformation script
 * Run the `read_intermediate_data()` lines to load cached data the stage depends on
