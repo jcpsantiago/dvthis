@@ -45,7 +45,7 @@ It will have the following folder structure and initiate DVC for you
 └── stages
 ```
 
-This structure assumes a DVC pipeline for Machine Learning made out of `stages/*.R` which will 
+This structure assumes a DVC pipeline for Machine Learning made out of multiple `stages/*.R` which will 
 
 * take some data e.g. from a database using `queries/*.sql`
 * save that data as `data/raw/*.csv`
@@ -56,5 +56,28 @@ You are free, of course, to use your own naming conventions, stages, etc.
 E.g. maybe you don't have data coming from a database -- just delete the `queries` dir,
 and instead place your data in `data/raw`. Bam!
 
-* 
+### Stages
+
+Stages should be small and focused, just like you would write your normal R functions.
+For example you could have stages (separate, independent scripts) for:
+
+* Fetching data
+* Cleaning data
+* Feature transformation
+* Train-test split
+* Hyperparameter tuning
+* Train final model
+* Produce metrics
+* Produce plots
+
+This way it's possible to experiment and make changes to a smaller amount of code 
+each time.
+It also allows to have an interactive workflow e.g. if you want to experiment with a new transformation
+
+* Open the feature transformation script
+* Run the `read_intermediate_data()` lines to load cached data the stage depends on
+* Add a new transformation to e.g. a `mutate()`
+* Run the modified chunk of code and see the result in the R REPL/Console
+* Save the script and run `dvc repro` in the terminal to run the pipeline starting at the modified feature transformation script all the way downstream
+* Rinse and repeat!
 
