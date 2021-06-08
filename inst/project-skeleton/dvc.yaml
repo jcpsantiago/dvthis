@@ -1,0 +1,7 @@
+stages:
+  hello_world:
+    cmd: Rscript stages/hello_world.R
+    deps:
+      - stages/hello_world.R
+    outs:
+      - data/intermediate/hello_world.qs
