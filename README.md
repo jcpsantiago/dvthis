@@ -20,7 +20,7 @@ remotes::install_github("jcpsantiago/dvcru")
 
 ## Using DVC
 
-Nothing beats reading their [docs](), but here's how to start:
+Nothing beats reading their [docs](https://dvc.org/doc), but here's how to start:
 
 * Create a new R project based on the `dvcru` template.
 It will have the following folder structure and initiate DVC for you 
