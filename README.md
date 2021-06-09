@@ -56,6 +56,10 @@ You are free, of course, to use your own naming conventions, stages, etc.
 E.g. maybe you don't have data coming from a database -- just delete the `queries` dir,
 and instead place your data in `data/raw`. Bam!
 
+Since this is an R package, the examples focus on R scripts, but DVC does not care about languages.
+I have mixed Clojure and R, for example, without ill effects.
+
+
 ### Stages
 
 Stages should be small and focused, just like you would write your normal R functions.
