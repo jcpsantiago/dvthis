@@ -1,0 +1,4 @@
+Binding: create_dvc_project_gui
+Title: Project using DVC pipeline
+OpenFiles: dvc.yaml
+Icon: DVC.png

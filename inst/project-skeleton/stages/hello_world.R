@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+#
 this_stage <- dvcru::stage_header("Hello and welcome to this DVC pipeline!")
 
 # do some meaningful work

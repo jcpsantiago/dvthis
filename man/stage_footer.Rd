@@ -10,7 +10,7 @@ stage_footer(.stage = this_stage)
 \item{.stage}{the name of the stage}
 }
 \value{
-
+prints a closing footer
 }
 \description{
 Message to finish stage

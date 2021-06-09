@@ -4,4 +4,4 @@ stages:
     deps:
       - stages/hello_world.R
     outs:
-      - data/intermediate/hello_world.qs
+      - data/intermediate/random_numbers.qs

@@ -25,7 +25,7 @@ stage_header <- function(this_stage, .right = NULL) {
 #'
 #' @param .stage the name of the stage
 #'
-#' @return
+#' @return prints a closing footer
 #' @export
 stage_footer <- function(.stage = this_stage) {
   message(
