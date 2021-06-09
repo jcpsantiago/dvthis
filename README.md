@@ -27,7 +27,7 @@ You can use DVC by itself by running `dvc init` within a git repo dir
 to make your life easier.
 Or, you can use `dvcru` to setup the scaffolding for you.
 
-* Create a new R project based on the `dvcru` template. `<WIP>`
+* Create a new R project based on the `dvcru` template.
 It will have the following folder structure and initiate DVC for you 
 (if it is installed, otherwise it shows you a warning):
 
