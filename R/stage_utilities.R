@@ -17,7 +17,7 @@ stage_header <- function(this_stage, .right = NULL) {
     right = .right
   )
 
-  rendered_stage
+  as.character(rendered_stage)
 }
 
 
