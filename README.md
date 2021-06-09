@@ -112,4 +112,6 @@ dvcru::save_intermediate_result(dragons_and_kingdoms)
 dvcru::stage_footer()
 ```
 
+## Contributing
 
+Everyone has their prefered way of working, so maybe `dvcru` is not doing exactly what you need. Let me know! I'll also gladly review any feature or bug PRs :)
