@@ -29,7 +29,7 @@ Or, you can use `dvcru` to setup the scaffolding for you.
 
 * Create a new R project based on the `dvcru` template.
 It will have the following folder structure and initiate DVC for you 
-(if it is installed, otherwise it shows you a warning):
+(DVC must be installed on your system):
 
 ```sh
 .
@@ -55,6 +55,10 @@ This structure assumes a DVC pipeline for Machine Learning made out of multiple 
 You are free, of course, to use your own naming conventions, stages, etc.
 E.g. maybe you don't have data coming from a database -- just delete the `queries` dir,
 and instead place your data in `data/raw`. Bam!
+
+Since this is an R package, the examples focus on R scripts, but DVC does not care about languages.
+I have mixed Clojure and R, for example, without ill effects.
+
 
 ### Stages
 
