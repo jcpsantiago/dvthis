@@ -1,7 +1,7 @@
 Package: dvcru
 Type: Package
 Title: Utilities for DVC (Data Version Control) Pipelines
-Version: 0.2.0.9000
+Version: 0.2.1.9000
 Authors@R: person("Joao", "Santiago", , "me@jcpsantiago.xyz", role = c("aut", "cre"))
 Description: DVC enables the creation of data pipelines and tracking data and models via git.
     This package contains an RStudio project template to boostrap development, and
