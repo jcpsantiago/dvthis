@@ -116,6 +116,14 @@ dvcru::save_intermediate_result(dragons_and_kingdoms)
 dvcru::stage_footer()
 ```
 
+### RStudio Addins
+
+`dvcru` also packs RStudio addins with shortcuts to commonly used DVC commands.
+I find it useful to bind these to keyboard shortcuts:
+
+* `Repro` will run `dvc repro`.
+* `Repro until currently open stage` will run all upstream stages on which the currently open stage script depends.
+
 ## Contributing
 
 Everyone has their prefered way of working, so maybe `dvcru` is not doing exactly what you need. Let me know! I'll also gladly review any feature or bug PRs :)

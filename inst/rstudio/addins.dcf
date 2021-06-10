@@ -1,4 +1,9 @@
-Name: DVC repro
+Name: Repro
 Description: Runs `dvc repro`.
 Binding: dvc_repro
+Interactive: false
+
+Name: Repro until currently open stage
+Description: Reruns all upstream dependencies of the currently open stage script.
+Binding: dvc_repro_upstream
 Interactive: false

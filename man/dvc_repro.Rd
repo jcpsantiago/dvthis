@@ -4,7 +4,10 @@
 \alias{dvc_repro}
 \title{Run `dvc repro`}
 \usage{
-dvc_repro()
+dvc_repro(stage = "")
+}
+\arguments{
+\item{stage}{up to which stage to run. Default = "" i.e. tries to run the whole pipeline.}
 }
 \value{
 runs `dvc repro`
