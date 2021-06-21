@@ -6,7 +6,7 @@
 #' @export
 dvc_repro <- function(stage = "") {
   if (stage != "") {
-    stage <- (paste(" ", stage))
+    stage <- (paste0(" ", stage))
   }
   message(
     glue::glue("Running `dvc repro{stage}`")
@@ -41,7 +41,14 @@ dvc_repro_upstream <- function() {
   stages_df_list <- purrr::imap(
     dvc_yaml$stages,
     function(value, key) {
-      data.frame(stage = key, cmd = value$cmd, deps = value$deps, outs = value$outs)
+
+      if ("foreach" %in% names(value)) {
+        .cmd <- value$do$cmd
+      } else {
+        .cmd <- value$cmd
+      }
+
+      data.frame(stage = key, cmd = .cmd)
     }
   )
 

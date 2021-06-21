@@ -80,6 +80,7 @@ save_intermediate_result <- function(r_object, .filename = NULL) {
 #' @param filename the filename to load as a string
 #' @return an R object
 #' @author João Santiago
+#' @export
 read_intermediate_result <- function(filename) {
   qs::qread(
     here::here(

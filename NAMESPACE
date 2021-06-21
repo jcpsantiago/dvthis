@@ -2,6 +2,7 @@
 
 export(dvc_repro)
 export(log_stage_step)
+export(read_intermediate_result)
 export(save_intermediate_result)
 export(stage_footer)
 export(stage_header)
