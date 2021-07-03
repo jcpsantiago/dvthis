@@ -9,7 +9,7 @@ create_dvc_project_gui(path, ...)
 \arguments{
 \item{path}{user input; path to the new project}
 
-\item{...}{for future expansion, currenly unused}
+\item{...}{for future expansion, currently unused}
 }
 \description{
 Create a new DVC project

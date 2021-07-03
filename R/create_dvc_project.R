@@ -1,7 +1,7 @@
 #' Create a new DVC project
 #'
 #' @param path user input; path to the new project
-#' @param ... for future expansion, currenly unused
+#' @param ... for future expansion, currently unused
 #'
 create_dvc_project_gui <- function(path, ...) {
   tryCatch(

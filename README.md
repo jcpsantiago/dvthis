@@ -96,7 +96,7 @@ n_of_dragons <- commandArgs(trailingOnly = TRUE)[1]
 this_stage <- dvthis::stage_header("Choosing dragons")
 
 dvthis::log_stage_step("Loading dragon data")
-dragons_raw <- readr::read_csv(here::here("data/raw/dragons.csv"))
+dragons_raw <- dvthis::read_raw_data("dragons.csv", readr::read_csv)
 
 dvthis::log_stage_step("Loading clean kingdom data")
 kingdoms <- dvthis::read_intermediate_result("kingdoms")
