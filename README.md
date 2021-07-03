@@ -1,33 +1,33 @@
 
-# dvcru
+# dvthis
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/jcpsantiago/dvcru/workflows/R-CMD-check/badge.svg)](https://github.com/jcpsantiago/dvcru/actions)
+[![R-CMD-check](https://github.com/jcpsantiago/dvthis/workflows/R-CMD-check/badge.svg)](https://github.com/jcpsantiago/dvthis/actions)
 <!-- badges: end -->
 
-The goal of `dvcru` is to provide utility functions for [DVC](https://dvc.org) 
+The goal of `dvthis` is to provide utility functions for [DVC](https://dvc.org) 
 pipelines using R scripts.
 An additional goal is to document the usual workflows they enable, and provide
 a template for projects using DVC and R.
 
 ## Installation
 
-You can install the current development version of `dvcru` with
+You can install the current development version of `dvthis` with
 
 ``` r
-remotes::install_github("jcpsantiago/dvcru")
+remotes::install_github("jcpsantiago/dvthis")
 ```
 
 No version available in CRAN yet.
 
-## Using dvcru
+## Using dvthis
 
 You can use DVC by itself by running `dvc init` within a git repo dir
 (read their docs [here](https://dvc.org/doc)) and then use the utility functions
 to make your life easier.
-Or, you can use `dvcru` to setup the scaffolding for you.
+Or, you can use `dvthis` to setup the scaffolding for you.
 
-* Create a new R project based on the `dvcru` template.
+* Create a new R project based on the `dvthis` template.
 It will have the following folder structure and initiate DVC for you 
 (DVC must be installed on your system):
 
@@ -93,32 +93,32 @@ A stage script could look something like this:
 n_of_dragons <- commandArgs(trailingOnly = TRUE)[1]
 
 # assigning it to this_stage by convention will allow stage_footer() to be called without args
-this_stage <- dvcru::stage_header("Choosing dragons")
+this_stage <- dvthis::stage_header("Choosing dragons")
 
-dvcru::log_stage_step("Loading dragon data")
+dvthis::log_stage_step("Loading dragon data")
 dragons_raw <- readr::read_csv(here::here("data/raw/dragons.csv"))
 
-dvcru::log_stage_step("Loading clean kingdom data")
-kingdoms <- dvcru::read_intermediate_result("kingdoms")
+dvthis::log_stage_step("Loading clean kingdom data")
+kingdoms <- dvthis::read_intermediate_result("kingdoms")
 
-dvcru::log_stage_step("Keeping only {n_of_dragons} dragons")
+dvthis::log_stage_step("Keeping only {n_of_dragons} dragons")
 dragons_clean <- head(dragons_raw, n_of_dragons)
 dragons_and_kingdoms <- dplyr::inner_join(dragons_clean, kingdoms)
 
 # you don't have to save every single intermediate result, but here I want to 
 # be extensive for documentation sake
-dvcru::log_stage_step("Saving intermediate dragons_clean")
-dvcru::save_intermediate_result(dragons_clean)
+dvthis::log_stage_step("Saving intermediate dragons_clean")
+dvthis::save_intermediate_result(dragons_clean)
 
-dvcru::log_stage_step("Saving intermediate dragons_clean")
-dvcru::save_intermediate_result(dragons_and_kingdoms)
+dvthis::log_stage_step("Saving intermediate dragons_clean")
+dvthis::save_intermediate_result(dragons_and_kingdoms)
 
-dvcru::stage_footer()
+dvthis::stage_footer()
 ```
 
 ### RStudio Addins
 
-`dvcru` also packs RStudio addins with shortcuts to commonly used DVC commands.
+`dvthis` also packs RStudio addins with shortcuts to commonly used DVC commands.
 I find it useful to bind these to keyboard shortcuts:
 
 * `Repro` will run `dvc repro`.
@@ -126,4 +126,4 @@ I find it useful to bind these to keyboard shortcuts:
 
 ## Contributing
 
-Everyone has their prefered way of working, so maybe `dvcru` is not doing exactly what you need. Let me know! I'll also gladly review any feature or bug PRs :)
+Everyone has their prefered way of working, so maybe `dvthis` is not doing exactly what you need. Let me know! I'll also gladly review any feature or bug PRs :)

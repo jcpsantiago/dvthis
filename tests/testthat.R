@@ -1,4 +1,4 @@
 library(testthat)
-library(dvcru)
+library(dvthis)
 
-test_check("dvcru")
+test_check("dvthis")

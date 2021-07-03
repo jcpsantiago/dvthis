@@ -1,4 +1,4 @@
-Package: dvcru
+Package: dvthis
 Type: Package
 Title: Utilities for DVC (Data Version Control) Pipelines
 Version: 0.2.3.9000
@@ -8,8 +8,8 @@ Description: DVC enables the creation of data pipelines and tracking data and mo
     some useful utilities to accelarate common tasks such as saving and loading 
     intermediate results.
 License: MIT + file LICENSE
-URL: https://github.com/jcpsantiago/dvcru
-BugReports: https://github.com/jcpsantiago/dvcru/issues
+URL: https://github.com/jcpsantiago/dvthis
+BugReports: https://github.com/jcpsantiago/dvthis/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

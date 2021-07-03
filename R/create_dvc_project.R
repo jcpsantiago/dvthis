@@ -29,7 +29,7 @@ create_dvc_project_gui <- function(path, ...) {
 
   cli::cat_rule("Copying project skeleton...")
   from <- system.file("project-skeleton",
-    package = "dvcru",
+    package = "dvthis",
     lib.loc = NULL, mustWork = FALSE
   )
 

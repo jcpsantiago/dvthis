@@ -1,8 +1,8 @@
-#' \code{dvcru} package
+#' \code{dvthis} package
 #'
 #' R utilities for DVC pipelines
 #' @docType package
-#' @name dvcru
+#' @name dvthis
 NULL
 
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
