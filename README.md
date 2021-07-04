@@ -63,6 +63,7 @@ I have mixed Clojure and R, for example, without ill effects.
 ### Stages
 
 Stages should be small and focused, just like you would write your normal R functions.
+You can add a new R stage using the `add_r_stage` funciton.
 For example you could have stages (separate, independent scripts) for:
 
 * Fetching data
