@@ -27,7 +27,7 @@ You can use DVC by itself by running `dvc init` within a git repo dir
 to make your life easier.
 Or, you can use `dvthis` to setup the scaffolding for you.
 
-* Create a new R project based on the `dvthis` template.
+* Create a new R (RStudio) project based on the `dvthis` template.
 It will have the following folder structure and initiate DVC for you 
 (DVC must be installed on your system):
 
