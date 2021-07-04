@@ -1,34 +1,66 @@
-add_stage_to_dvc_yaml <- function(current_dvc_yaml, new_stage_name, .deps = NULL, .outs = NULL) {
+#' Prepare new stage list for DVC YAML
+#'
+#' @param new_stage_name string name of new stage.
+#' @param .deps character vector with paths to dependencies. Always adds the stage script as a dependency. Optional.
+#' @param .outs character vector with paths of outputs. Optional.
+#'
+#' @return a list.
+prepare_new_stage_list <- function(new_stage_name, .deps = NULL, .outs = NULL) {
   cmd <- c(glue::glue("Rscript stages/{new_stage_name}.R"))
   deps <- c(glue::glue("stages/{new_stage_name}.R"), .deps)
   outs <- .outs
 
   new_stage_list_start <- list(
     stages = list(
-      new_stage = list("cmd" = cmd, "deps" = deps, "outs" = outs)
+      new_stage = c("cmd" = cmd, "deps" = deps, "outs" = outs)
     )
   )
   names(new_stage_list_start$stages) <- new_stage_name
-  new_stage_list <- modifyList(new_stage_list_start, new_stage_list_start)
 
-  new_dvc_yaml <- modifyList(current_dvc_yaml, new_stage_list)
-
-  return(new_dvc_yaml)
+  modifyList(new_stage_list_start, new_stage_list_start)
 }
 
+#' Build DVC arguments
+#'
+#' @param option command line option as a string. Example `-d`.
+#' @param values character vector.
+#'
+#' @return a character.
+build_dvc_args <- function(option, values) {
+  ifelse(
+    is.null(values),
+    "",
+    paste(sapply(values, function(x) paste(option, x)), collapse = " ")
+  )
+}
 
-#' Title
+#' Combine all arguments for DVC command
 #'
-#' @param stage_name
-#' @param .deps
-#' @param .outs
-#' @param dvc_yaml_path
+#' @param stage_name name of the stage without any white spaces. Example: `train_model`
+#' @param .deps character vector with paths to dependencies. Optional.
+#' @param .outs character vector with paths of outputs. Optional.
 #'
-#' @return
+#' @return a character.
+combine_dvc_args <- function(stage_name, .deps = NULL, .outs = NULL) {
+  stage_script_path <- glue::glue("stages/{stage_name}.R")
+
+  deps <- build_dvc_args("-d", c(.deps, stage_script_path))
+  outs <- build_dvc_args("-o", .outs)
+
+  glue::glue(
+    "run --no-exec -n {stage_name} {deps} {outs} Rscript {stage_script_path}"
+  )
+}
+
+#' Add a new R stage
+#'
+#' @param stage_name name of the stage without any white spaces. Example: `train_model`
+#' @param .deps character vector with paths to dependencies. Optional.
+#' @param .outs character vector with paths of outputs. Optional.
+#'
+#' @return function is run for its side effects.
 #' @export
-#'
-#' @examples
-add_r_stage <- function(stage_name, .deps = NULL, .outs = NULL, dvc_yaml_path = NULL) {
+add_r_stage <- function(stage_name, .deps = NULL, .outs = NULL) {
   dvc_yaml_path <- here::here("dvc.yaml")
   if (!fs::file_exists(dvc_yaml_path)) {
     stop(
@@ -48,28 +80,19 @@ add_r_stage <- function(stage_name, .deps = NULL, .outs = NULL, dvc_yaml_path = 
     name <- stage_name
   }
 
-  current_dvc_yaml <- yaml::read_yaml(dvc_yaml_path)
-  if (name %in% names(current_dvc_yaml$stages)) {
-    stop(
-      glue::glue("`{name}` is already a stage in {dvc_yaml_path}, please use a different name."),
-      call. = FALSE
-    )
-  }
-
-  if (!yesno::yesno(
-    glue::glue("This will write to {dvc_yaml_path}. Continue?")
-  )) {
-    stop("Aborting writing `dvc.yaml`", call. = FALSE)
-  }
-
-  new_dvc_yaml <- add_stage_to_dvc_yaml(current_dvc_yaml, name, .deps, .outs)
-
-  yaml::write_yaml(new_dvc_yaml, dvc_yaml_path)
-
   new_stage_path <- here::here(glue::glue("stages/{name}.R"))
   fs::file_copy(
     fs::path_package("dvthis", "templates", "new_stage.R"),
     new_stage_path
+  )
+
+  dvc_args <- combine_dvc_args(name, .deps, .outs)
+
+  tryCatch(
+    system2("dvc", dvc_args),
+    finally = function() {
+      fs::file_delete(new_stage_path)
+    }
   )
 
   rstudioapi::navigateToFile(new_stage_path)
