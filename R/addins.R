@@ -11,7 +11,7 @@ dvc_repro <- function(stage = "") {
   message(
     glue::glue("Running `dvc repro{stage}`")
   )
-  system(
+  rstudioapi::terminalExecute(
     glue::glue("dvc repro{stage}")
   )
 }
