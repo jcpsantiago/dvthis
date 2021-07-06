@@ -27,22 +27,22 @@ You can use DVC by itself by running `dvc init` within a git repo dir
 to make your life easier.
 Or, you can use `dvthis` to setup the scaffolding for you.
 
-* Create a new R project based on the `dvthis` template.
+* Create a new R (RStudio) project based on the `dvthis` template.
 It will have the following folder structure and initiate DVC for you 
 (DVC must be installed on your system):
 
 ```sh
 .
-├── data                   # all data that's not a model, metrics or plots goes here
-│  ├── intermediate        # outputs of each stage to be used in future stages
-│  └── raw                 # original data; should never be overwritten; saved in remote storage with DVC
-├── metrics                # metrics of interest in JSON; DVC can track these over time
-├── models                 # final output of your pipeline, in case it's a model
-├── plots                  # any plots produced, including CSVs with data for plots (see DVC docs)
-├── queries                # .sql files or other format so that queries are also tracked
-├── R                      # additional R functions needed for this project and not in a pkg yet
-├── reports                # more complete reports or model cards
-└── stages                 # scripts for each stage; doesn't need to be only in R!
+├── data               # all data that's not a model, metrics or plots goes here
+│  ├── intermediate    # outputs of each stage to be used in future stages
+│  └── raw             # original data; should never be overwritten; saved in remote storage with DVC
+├── metrics            # metrics of interest in JSON; DVC can track these over time
+├── models             # final output of your pipeline, in case it's a model
+├── plots              # any plots produced, including CSVs with data for plots (see DVC docs)
+├── queries            # .sql files or other format so that queries are also tracked
+├── R                  # additional R functions needed for this project and not in a pkg yet
+├── reports            # more complete reports or model cards
+└── stages             # scripts for each stage; doesn't need to be only in R!
 ```
 
 This structure assumes a DVC pipeline for Machine Learning made out of multiple `stages/*.R` which will 
